@@ -1,4 +1,3 @@
-var isGameOver = false; // togloom duussan esehiig shalgana
 var activePlayer = 0; // idewhtei toglogch 
 var scores = [0, 0]; // onoonii haritsaa
 var roundScore = 0; // neg uyiin onoo
@@ -8,7 +7,6 @@ const diceImg = document.querySelector(".dice"),
     newGameBtn = document.querySelector(".btn-new");
 
 function reset() {
-    isGameOver = false;
     document.querySelector(".player-" + activePlayer + "-panel").classList.remove('winner');
     activePlayer = 0;
     scores = [0, 0];
@@ -25,29 +23,25 @@ function reset() {
 }
 window.onload = reset();
 rollBtn.onclick = () => {
-    if (!isGameOver) {
-        var dice = Math.floor(Math.random() * 6) + 1; // shoonii code
-        diceImg.style.display = "block";
-        diceImg.src = "dice-" + dice + ".png";
-        if (dice !== 1) {
-            roundScore += dice;
-            document.getElementById("current-" + activePlayer).textContent = roundScore;
-        } else {
-            switchPlayer();
-        }
+    var dice = Math.floor(Math.random() * 6) + 1; // shoonii code
+    diceImg.style.display = "block";
+    diceImg.src = "dice-" + dice + ".png";
+    if (dice !== 1) {
+        roundScore += dice;
+        document.getElementById("current-" + activePlayer).textContent = roundScore;
+    } else {
+        switchPlayer();
     }
 }
 holdBtn.onclick = () => {
-    if (isGameOver) {
-        scores[activePlayer] += roundScore;
-        if (scores[activePlayer] >= 10) {
-            document.getElementById("name-" + activePlayer).textContent = "WINNER";
-            document.querySelector(".player-" + activePlayer + "-panel").classList.add('winner');
-            isGameOver = true; // togloom duussan tolowt orj bn 
-        } else {
-            document.getElementById("score-" + activePlayer).textContent = scores[activePlayer];
-            switchPlayer();
-        }
+    scores[activePlayer] += roundScore;
+    if (scores[activePlayer] >= 10) {
+        document.getElementById("name-" + activePlayer).textContent = "WINNER";
+        document.querySelector(".player-" + activePlayer + "-panel").classList.add('winner');
+        isGameOver = true; // togloom duussan tolowt orj bn 
+    } else {
+        document.getElementById("score-" + activePlayer).textContent = scores[activePlayer];
+        switchPlayer();
     }
 }
 newGameBtn.onclick = () => {
