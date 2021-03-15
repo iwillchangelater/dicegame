@@ -25,7 +25,7 @@ function reset() {
 }
 window.onload = reset();
 rollBtn.onclick = () => {
-    if (!isgameover) {
+    if (!isGameOver) {
         var dice = Math.floor(Math.random() * 6) + 1; // shoonii code
         diceImg.style.display = "block";
         diceImg.src = "dice-" + dice + ".png";
@@ -38,12 +38,12 @@ rollBtn.onclick = () => {
     }
 }
 holdBtn.onclick = () => {
-    if (isgameover) {
+    if (isGameOver) {
         scores[activePlayer] += roundScore;
         if (scores[activePlayer] >= 10) {
             document.getElementById("name-" + activePlayer).textContent = "WINNER";
             document.querySelector(".player-" + activePlayer + "-panel").classList.add('winner');
-            isgameover = true; // togloom duussan tolowt orj bn 
+            isGameOver = true; // togloom duussan tolowt orj bn 
         } else {
             document.getElementById("score-" + activePlayer).textContent = scores[activePlayer];
             switchPlayer();
